@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colora & Relaxa — Livros de Colorir em PDF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fff;
+      --card:#fff;
+      --muted:#f7f8fb;
+      --accent:#FF7BAC;
+      --accent-2:#FFD6E0;
+      --text:#1f2d3d;
+      --soft:#6b7785;
+      --radius:12px;
+      --container:1100px;
+      --shadow:0 6px 18px rgba(31,45,61,0.08);
+      font-family:'Poppins', sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);line-height:1.6;}
+    .container{max-width:var(--container);margin:0 auto;padding:2rem;}
+    header{background:#fff;box-shadow:var(--shadow);}
+    .header-inner{display:flex;justify-content:space-between;align-items:center;}
+    nav a{margin-left:1rem;text-decoration:none;color:var(--soft);font-weight:500;}
+    nav a:hover{color:var(--accent);}
+    .hero{text-align:center;padding:3rem 1rem;background:var(--muted);}
+    .hero h1{font-size:2rem;color:var(--accent);}
+    .btn{display:inline-block;padding:.8rem 1.4rem;border-radius:10px;text-decoration:none;font-weight:600;cursor:pointer;}
+    .btn.primary{background:var(--accent);color:#fff;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;text-align:center;}
+    .card h3{margin:.8rem 0;color:var(--text);}
+    .card p{font-size:.9rem;color:var(--soft);}
+    .card .btn{margin-top:.8rem;font-weight:600;}
+    .card img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+    /* PIX Section */
+    .pix-section{background:var(--accent-2);padding:3rem 1rem;margin-top:3rem;text-align:center;border-radius:var(--radius);}
+    .pix-section h2{color:var(--accent);margin-bottom:1.5rem;}
+    .pix-section img{max-width:200px;margin-bottom:1rem;}
+    .pix-key{padding:.8rem;width:250px;text-align:center;font-weight:600;border-radius:8px;border:1px solid #ddd;margin-bottom:1rem;}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <h2>🎨 Colora & Relaxa</h2>
+      <nav>
+        <a href="#produtos">Loja</a>
+        <a href="#pix">Pagamento PIX</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Relaxe e dê vida às páginas 🎨</h1>
+    <p>Baixe agora seus livros de colorir em PDF.</p>
+    <a class="btn primary" href="#produtos">Ver Livros</a>
+  </section>
+
+  <!-- Produtos -->
+  <section id="produtos" class="container">
+    <h2 style="text-align:center;margin-bottom:2rem;">Nossos Livros</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="CAPA (4).jpg" alt="Livro 1">
+        <h3>A Criação Do Mundo</h3>
+        <p>50 páginas em PDF para imprimir e colorir.</p>
+        <a class="btn primary" href="#pix">Comprar PDF - R$ 10,00</a>
+      </div>
+      <div class="card">
+        <img src="c:\Users\lua77\Downloads\24432502.webp" alt="Livro 2">
+        <h3>Combo + De 70 Desenhos</h3>
+        <p>+70 desenhos detalhados para todas as idades.</p>
+        <a class="btn primary" href="#pix">Comprar PDF - R$ 15,00</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIX Section -->
+  <section id="pix" class="pix-section">
+    <h2>Pagamento via PIX</h2>
+    <p>Copie a chave PIX para pagar:</p>
+    <input type="text" class="pix-key" value="ac5dae56-446d-4d9b-85af-482b1e3d1356" id="pixKey" readonly>
+    <br><br>
+    <button class="btn primary" onclick="copyPIX()">Copiar Chave PIX</button>
+    <p style="margin-top:1rem;color:var(--soft);font-size:.9rem;">Após o pagamento, envie o comprovante para receber o PDF.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding:2rem;text-align:center;background:#f9f9f9;color:var(--soft);margin-top:2rem;">
+    <p>© 2025 Colora & Relaxa — Todos os direitos reservados</p>
+  </footer>
+
+  <!-- Script corrigido para copiar PIX -->
+  <script>
+    function copyPIX() {
+      const pixKey = document.getElementById('pixKey').value;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(pixKey)
+          .then(() => alert("Chave PIX copiada! Agora você pode colar no app do banco para pagar."))
+          .catch(() => alert("Não foi possível copiar a chave PIX automaticamente. Copie manualmente."));
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = pixKey;
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          alert("Chave PIX copiada! Agora você pode colar no app do banco para pagar.");
+        } catch {
+          alert("Não foi possível copiar a chave PIX automaticamente. Copie manualmente.");
+        }
+        document.body.removeChild(textArea);
+      }
+    }
+  </script>
+</body>
+</html>
